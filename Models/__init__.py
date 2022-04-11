@@ -1,3 +1,4 @@
 from .BaseModel import BaseModel
 from .PlayerGeneralTraditionalTotals import PlayerGeneralTraditionalTotals
 
+from .PlayerGeneralTraditionalTotals_Playoffs import PlayerGeneralTraditionalTotals_Playoffs
