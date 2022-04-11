@@ -2,7 +2,7 @@ import requests
 from settings import Settings
 from Models import PlayerGeneralTraditionalTotals
 
-settings = Settings
+settings = Settings()
 settings.db.create_tables([PlayerGeneralTraditionalTotals], safe=True)
 
 headers = {
@@ -47,10 +47,12 @@ season_list = [
     '2021-22'
 ]
 per_mode = 'Totals'
+# season_type = 'Playoffs'
+season_type = 'Regular+Season'
 
 for season_id in season_list:
-    player_info_url = 'https://stats.nba.com/stats/leaguedashplayerstats?College=&Conference=&Country=&DateFrom=&DateTo=&Division=&DraftPick=&DraftYear=&GameScope=&GameSegment=&Height=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PORound=0&PaceAdjust=N&PerMode={}&Period=0&PlayerExperience=&PlayerPosition=&PlusMinus=N&Rank=N&Season={}&SeasonSegment=&SeasonType=Regular+Season&ShotClockRange=&StarterBench=&TeamID=0&TwoWay=0&VsConference=&VsDivision=&Weight='.format(
-        per_mode, season_id)
+    player_info_url = 'https://stats.nba.com/stats/leaguedashplayerstats?College=&Conference=&Country=&DateFrom=&DateTo=&Division=&DraftPick=&DraftYear=&GameScope=&GameSegment=&Height=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PORound=0&PaceAdjust=N&PerMode={}&Period=0&PlayerExperience=&PlayerPosition=&PlusMinus=N&Rank=N&Season={}&SeasonSegment=&SeasonType={}&ShotClockRange=&StarterBench=&TeamID=0&TwoWay=0&VsConference=&VsDivision=&Weight='.format(
+        per_mode, season_id, season_type)
     # json response
     response = requests.get(url=player_info_url, headers=headers).json()
     # pulling just the data we want
