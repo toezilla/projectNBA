@@ -1,10 +1,21 @@
 import requests
-import os
-from datetime import datetime, timedelta
+import schedule
+import time
+import sys
 from settings import Settings
 from Models import DailyPlayoff
 
-if __name__ == "__main__":
+
+def message():
+    print("schedule will be started in one minute...")
+
+
+def exit():
+    print("schedule ends...")
+    sys.exit()
+
+
+def DailyScrap():
     settings = Settings()
     settings.db.create_tables([DailyPlayoff], safe=True)
 
@@ -105,3 +116,13 @@ if __name__ == "__main__":
         player.save()
 
     print("Done inserting player general traditional season total playoff data to the DB!")
+
+
+if __name__ == "__main__":
+    schedule.every().day.at("14:59").do(message)
+    schedule.every().day.at("15:00").do(DailyScrap)
+    schedule.every().day.at("15:10").do(exit)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
