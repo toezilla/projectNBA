@@ -5,7 +5,7 @@ from Models import PlayerGeneralTraditionalTotals_Playoffs
 if __name__ == "__main__":
     settings = Settings()
     settings.db.create_tables([PlayerGeneralTraditionalTotals_Playoffs], safe=True)
-    
+
     headers = {
         'Connection': 'keep-alive',
         'Accept': 'application/json, text/plain, */*',
